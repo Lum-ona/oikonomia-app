@@ -17,7 +17,7 @@ const TabsLayout: React.FC = () => {
       borderTopWidth: 0,
       paddingTop: hp(1),
     },
-    tabBarActiveTintColor: theme.colors.primary,
+    tabBarActiveTintColor: theme.colors.textDark,
     tabBarInactiveTintColor: theme.colors.textLight,
   };
 
