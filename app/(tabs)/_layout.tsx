@@ -1,45 +1,54 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import React from "react";
+import { Tabs } from "expo-router";
+import Icon from "@/assets/icons";
+import { useTheme } from "@/contexts/ThemeContext";
+import { darkTheme, lightTheme } from "@/constants/theme";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+const TabsLayout: React.FC = () => {
+  const { isDarkMode } = useTheme();
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const screenOptions: BottomTabNavigationOptions = {
+    tabBarStyle: {
+      backgroundColor: theme.colors.background,
+      borderTopWidth: 0,
+      paddingTop: hp(1),
+    },
+    tabBarActiveTintColor: theme.colors.primary,
+    tabBarInactiveTintColor: theme.colors.textLight,
+  };
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+    <Tabs screenOptions={screenOptions}>
+      {[
+        { name: "home", icon: "home" },
+        { name: "talents", icon: "people-arrows" },
+      ].map(({ name, icon }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title: "",
+            tabBarIcon: ({ color, size }) => (
+              <>
+                {name === "home" && (
+                  <Icon name={icon} size={size} color={color} />
+                )}
+                {name == "talents" && (
+                  <FontAwesome6 name={icon} size={size} color={color} />
+                )}
+              </>
+            ),
+            headerShown: false,
+            // tabBarStyle: { display: "none" },
+          }}
+        />
+      ))}
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;
