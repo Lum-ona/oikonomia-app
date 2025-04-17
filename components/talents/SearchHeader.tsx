@@ -1,18 +1,16 @@
-// SearchHeader.tsx
 import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { heightPercentageToDP } from "react-native-responsive-screen";
-import React from "react";
 
-type SearchHeaderProps = {
+interface SearchHeaderProps {
   placeholder: string;
-};
+}
 
 const SearchHeader: React.FC<SearchHeaderProps> = ({ placeholder }) => {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   return (
     <View style={styles.container}>
