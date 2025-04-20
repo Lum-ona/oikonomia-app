@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { heightPercentageToDP } from "react-native-responsive-screen";
-import VendorProductCard from "./VendorProductCard";
+import VendorProductCard from "../home/vendors/VendorProductCard";
 import Carousel from "./Carousel"; // Import Carousel here
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -53,7 +53,7 @@ const VendorProducts = () => {
   return (
     <FlatList
       data={data}
-      keyExtractor={(item) => item.id} // Ensure a unique key
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <VendorProductCard
           id={item.id}
@@ -71,28 +71,6 @@ const VendorProducts = () => {
       contentContainerStyle={styles.list}
       ListHeaderComponent={
         <View>
-          <View
-            style={{
-              justifyContent: "space-between",
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: heightPercentageToDP(2),
-            }}
-          >
-            <Text
-              style={{
-                color: "#f3f3f3",
-                fontSize: 20,
-                fontWeight: "700",
-                marginBottom: heightPercentageToDP(2),
-              }}
-            >
-              Lumona Mulengwa
-            </Text>
-            <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name="heart-circle" size={34} color="#f3f3f3" />
-            </TouchableOpacity>
-          </View>
           <Carousel />
           <Text
             style={{
@@ -105,7 +83,7 @@ const VendorProducts = () => {
             Products
           </Text>
         </View>
-      } // Add Carousel as a header
+      }
     />
   );
 };

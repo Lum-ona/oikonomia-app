@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
+import ScreenWrapper from "@/components/layouts/ScreenWrapper";
+import VendorProducts from "@/components/vendors/VendorProducts";
+import VendorHeader from "@/components/vendors/VendorHeader";
 
 const VendorPage = () => {
   return (
-    <View>
-      <Text>VendorPage</Text>
-    </View>
+    <ScreenWrapper>
+      <VendorHeader />
+      <VendorProducts />
+    </ScreenWrapper>
   );
 };
 

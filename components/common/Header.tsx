@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ router }) => {
     <View style={styles.header}>
       {/* Show BackButton if not on home, otherwise show logo */}
       {pathname !== "/home" ? (
-        <BackButton router={router} />
+        <BackButton />
       ) : (
         <Image
           source={require("../../assets/images/logo.png")}

@@ -14,7 +14,7 @@ export default function HomeScreen() {
   return (
     <ScreenWrapper>
       <Header router={router} />
-      <SearchHeader />
+      <SearchHeader placeholder="Search for a product or vendor..." />
       <FlatList
         data={sections}
         keyExtractor={(item) => item.id}

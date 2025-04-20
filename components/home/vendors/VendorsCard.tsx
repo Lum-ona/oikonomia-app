@@ -17,7 +17,7 @@ const VendorsCard: React.FC<{ vendor: Vendor }> = ({ vendor }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => router.push("/(stack)/VendorPage")}
+      onPress={() => router.push("/(stack)/vendorPage")}
       style={styles.card}
     >
       <Image source={{ uri: vendor.image }} style={styles.image} />

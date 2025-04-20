@@ -6,6 +6,8 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 
@@ -34,11 +36,15 @@ const data = [
 
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0); // <-- NEW: Ref to avoid frequent re-renders
   const flatListRef = useRef<FlatList>(null);
 
-  const handleScroll = (event: any) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
-    setActiveIndex(index);
+    if (index !== activeIndexRef.current) {
+      activeIndexRef.current = index;
+      setActiveIndex(index); // Triggers re-render only when index actually changes
+    }
   };
 
   return (
@@ -51,6 +57,7 @@ const Carousel = () => {
         showsHorizontalScrollIndicator={false}
         snapToAlignment="center"
         onScroll={handleScroll}
+        scrollEventThrottle={16} // <- Optional, but useful for performance
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.slide}>

@@ -6,7 +6,27 @@ import {
   widthPercentageToDP,
 } from "react-native-responsive-screen";
 
-const VendorProductCard = (id = 1) => {
+interface VendorProductCardProps {
+  id: string;
+  image: string;
+  brand: string;
+  rating: number;
+  reviews: number;
+  title: string;
+  price: number;
+  oldPrice: number;
+}
+
+const VendorProductCard: React.FC<VendorProductCardProps> = ({
+  id,
+  image,
+  brand,
+  rating,
+  reviews,
+  title,
+  price,
+  oldPrice,
+}) => {
   const router = useRouter();
   const imageUrl =
     "https://images.pexels.com/photos/6193427/pexels-photo-6193427.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"; // Replace with actual image URL
@@ -16,14 +36,14 @@ const VendorProductCard = (id = 1) => {
       style={styles.card}
       onPress={() => router.push(`/(stack)/product/${id}`)}
     >
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} />
       <TouchableOpacity style={styles.heartButton}>
         <Text style={styles.heartText}>♡</Text>
       </TouchableOpacity>
       <View style={styles.infoContainer}>
-        <Text style={styles.title}>Cush Coat</Text>
-        <Text style={styles.subtitle}>Urban Collection</Text>
-        <Text style={styles.price}>$ 325.00</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{brand}</Text>
+        <Text style={styles.price}>{price}</Text>
       </View>
     </TouchableOpacity>
   );
