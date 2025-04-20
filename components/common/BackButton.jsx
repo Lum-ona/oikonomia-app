@@ -10,10 +10,9 @@ const BackButton = ({ size = 26 }) => {
   const theme = isDarkMode ? darkTheme : lightTheme;
 
   const router = useRouter();
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
-  useEffect(() => {
-  }, [pathname]);
+  // useEffect(() => {}, [pathname]);
 
   return (
     <Pressable
